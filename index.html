@@ -13,26 +13,12 @@
         let paper = "Paper".toUpperCase();
         let scissors = "Scissors".toUpperCase()
         let choices = [rock, paper, scissors];
+        let playerScore = 0;
+        let computerScore = 0;
 
         function computerPlay() {
             return choices[Math.floor(Math.random() * choices.length)];
         }
-
-        /* let playerSelection = prompt("Enter Paper, Scissors, or Rock: ").toUpperCase();
-        console.log(playerSelection);
-
-        let computerSelection = computerPlay(); */
-
-        let data = {
-            currScores: {
-                playerScore: 0,
-                computerScore: 0
-            },
-            totals: {
-                playerTotal: 0,
-                computerTotal: 0
-            }
-        };
 
         function runFive() {
             let playerSelection = prompt("Enter Paper, Scissors, or Rock: ").toUpperCase();
@@ -44,46 +30,48 @@
         }
 
         function game() {
-            runFive();
-            runFive();
-            runFive();
-            runFive();
-            runFive();
+            for (let i = 1; i < 6; i++)
+                runFive(i);
+            console.log(calculateScore());
         }
 
         function playRound(playerSelection, computerSelection) {
             if (playerSelection == rock && computerSelection == paper) {
-                return "Computer wins, score: " + data.currScores.computerScore + 1;
+                computerScore++;
+                return "Computer wins this round, score: " + computerScore;
             } else if (playerSelection == rock && computerSelection == scissors) {
-                return "Player wins" + data.currScores.playerScore + 1;
+                playerScore++;
+                return "Player wins this round, score: " + playerScore;
             } else if (playerSelection == paper && computerSelection == rock) {
-                return "Player wins" + data.currScores.playerScore + 1;
+                playerScore++;
+                return "Player wins this round, score: " + playerScore;
             } else if (playerSelection == paper && computerSelection == scissors) {
-                return "Computer wins" + data.currScores.computerScore + 1;
+                computerScore++;
+                return "Computer wins this round, score: " + computerScore;
             } else if (playerSelection == scissors && computerSelection == rock) {
-                return "Computer wins" + data.currScores.computerScore + 1;
+                computerScore++;
+                return "Computer wins this round, score: " + computerScore;
             } else if (playerSelection == scissors && computerSelection == paper) {
-                return "Player wins" + data.currScores.playerScore + 1;
+                playerScore++;
+                return "Player wins this round, score: " + playerScore;
             } else if (playerSelection === computerSelection) {
-                return "Draw";
+                return "Draw - No points given";
             } else {
                 return "Incorrect text entered, please enter Rock, Paper, or Scissors";
             }
+        }
 
+        function calculateScore() {
+            if (playerScore > computerScore) {
+                return "Player wins with: " + playerScore + " Points";
+            } else if (computerScore > playerScore) {
+                return "Computer Wins with: " + computerScore + " Points";
+            } else {
+                return "DRAW - Player Score: " + playerScore + " Computer Score: " + computerScore;
+            }
         }
 
         game();
-
-        //TODO add calculate function
-        /* function calculateScore() {
-            if (playRound() == "Player wins") {
-                return "Player Score: " + data.currScores.playerScore + 1;
-            } else if (playRound() == "Computer wins") {
-                return "Computer Score: " + data.currScores.computerScore + 1;
-            } else if (playRound() == "Draw") {
-                return "Player Score: " + data.currScores.playerScore + 1 + " Computer Score: " + data.currScores.computerScore + 1;
-            }
-        } */
 
     </script>
 </body>
